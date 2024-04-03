@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import i18nConfig from '@/i18nConfig';
 
-const Header = () => {
+const LangBtnList = () => {
     const { i18n } = useTranslation();
   const currentLocale = i18n.language;
   const router = useRouter();
@@ -58,4 +58,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default LangBtnList

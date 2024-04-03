@@ -1,3 +1,7 @@
 {
-    "hello": "Hello dogs!"
+    "hello": "Hello dogs!",
+    "home": "Home",
+    "mydogs": "My Dogs",
+    "login": "Login",
+    "register": "Register"
 }

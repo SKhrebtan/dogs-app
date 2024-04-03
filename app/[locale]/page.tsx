@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Header from "@/langSwitcher/LangBtnList";
+
+import LangBtnList from "@/langSwitcher/LangBtnList";
 import initTranslations from "@/app/i18n";
 import TranslationsProvider from "@/langSwitcher/TranslationProvider"
 
@@ -10,14 +10,11 @@ type HomeProps = {
 }
 
 export default async function Home({ params: { locale } }:HomeProps) {
-  const { t,resources } = await initTranslations(locale, ['common']) 
-  return (
-     <TranslationsProvider resources={resources} locale={locale} namespaces={['common']}>
-    <main>
-      <Header/>
+  const { t } = await initTranslations(locale, ['common']) 
+  return (    
+      <main>
       <h1>{t('hello')}</h1>
       </main>
-      </TranslationsProvider>
   );
 }
 
