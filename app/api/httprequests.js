@@ -18,3 +18,13 @@ export const getAllUserDogs = async () => {
         throw error;
     }
 }
+
+export const getAllDogs = async () => {
+     try {
+        const response = await Axios.get('/dogs/alldogs');
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch user dogs:', error);
+        throw error;
+    }
+}
