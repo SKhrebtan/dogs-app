@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const DogsList = ({ dogs, page }) => {
   const dispatch = useDispatch();
   const { data } = useSession();
-
+  console.log(data);
   useEffect(() => {
     if (!data?.user?.token) {
       dispatch(setCurrentToken(null));
