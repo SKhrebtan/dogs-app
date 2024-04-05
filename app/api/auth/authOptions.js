@@ -40,8 +40,6 @@ const authOptions = {
   callbacks: {
     async signIn({ user, account, session }) {
       if (account?.provider === "credentials") {
-        console.log(user);
-
         return true;
       }
     },
