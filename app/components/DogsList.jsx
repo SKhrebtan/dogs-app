@@ -12,7 +12,7 @@ const DogsList = ({ dogs, page }) => {
   const { data } = useSession();
   console.log(data);
   useEffect(() => {
-    if (!data?.user?.token) {
+    if (!data.user.token) {
       dispatch(setCurrentToken(null));
       return;
     }
