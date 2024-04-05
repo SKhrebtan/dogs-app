@@ -22,6 +22,7 @@ export default async function RootLayout({
 }>) {
   const { t,resources } = await initTranslations(locale, ['common']) 
   const session = await getServerSession();
+
   return (
     <html lang="en">
       <body className={inter.className}>        

@@ -34,6 +34,7 @@ export default function Login() {
       email,
       password,
     });
+
     if (res?.error) {
       setError("Invalid email or password");
       if (res?.url) router.replace("/mydogs");
@@ -41,6 +42,7 @@ export default function Login() {
       setError("");
     }
   };
+
   if (sessionStatus === "loading") {
     return <h1>Loading...</h1>;
   }

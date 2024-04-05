@@ -4,10 +4,11 @@ import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import LangBtnList from "../../langSwitcher/LangBtnList";
 import { useTranslation } from "react-i18next";
-
+import { setCurrentToken } from "../store/auth/authSlice";
+import { useDispatch } from "react-redux";
 const DesktopNav = () => {     
     const { t, i18n:{language} } = useTranslation();
-
+const dispatch = useDispatch()
     const pathname = usePathname();
     
     const { data: session } = useSession();
@@ -41,7 +42,10 @@ const DesktopNav = () => {
                             {session.user?.email}
                             <li>
                                 <button
-                                onClick={()=>signOut()}
+                                    onClick={() => {
+                                        signOut()
+                                        dispatch(setCurrentToken(null))
+                                    }}
                                     className='p-[5px] bg-blue-500 rounded-full'
                                     type='button'>Logout</button>
                             </li>

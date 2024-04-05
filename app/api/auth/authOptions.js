@@ -30,8 +30,6 @@ const authOptions = {
           ).then((response) => response.json());
           if (user.statusCode === 401)
             throw new Error("User or password is incorrect");
-          setAuthHeader(user.token);
-          // await localStorage.setItem('token', user.token)
           return user;
         } catch (error) {
           throw new Error(error.message);
@@ -40,31 +38,20 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, session }) {
       if (account?.provider === "credentials") {
+        console.log(user);
+
         return true;
       }
     },
-    async jwt({ token, user, trigger, session }) {
-      if (user) {
-        token.user = user;
-      }
-
-      if (trigger === "update") {
-        const refreshedUser = await getUserById(token.user.id);
-        token.user = refreshedUser;
-      }
-
+    async jwt({ token, user }) {
+      if (user?.id) token.id = user.id;
+      if (user?.token) token.token = user.token;
+      if (user?.role) token.role = user.role;
       return token;
     },
-    //   async jwt({ token, user }) {
-    //    if (user?.id) token.id = user.id;
-    //     if (user?.token) token.token = user.token
-    //     if (user?.role) token.role = user.role
-    //   return token
-    // },
     async session({ session, token, user }) {
-      setAuthHeader(token.token);
       if (token?.id) session.user.id = token.id;
       if (token?.token) session.user.token = token.token;
       if (token?.role) session.user.role = token.role;
