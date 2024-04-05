@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 
 export default function Mydogs() {
   const { data, refetch, error, isLoading } = useGetDogsQuery();
-  const { data: session } = useSession();
+  const { data: session, status, update } = useSession();
 
   if (!session) {
     redirect("/");

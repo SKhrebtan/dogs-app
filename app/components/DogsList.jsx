@@ -16,7 +16,7 @@ const DogsList = ({ dogs, page }) => {
       dispatch(setCurrentToken(null));
       return;
     }
-    dispatch(setCurrentToken(data?.user.token));
+    data.user.token && dispatch(setCurrentToken(data.user.token));
   }, [data]);
 
   return (
