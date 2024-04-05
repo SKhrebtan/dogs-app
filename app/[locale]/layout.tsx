@@ -6,6 +6,7 @@ import AuthProvider from "../../utils/SessionProvider";
 import { getServerSession } from "next-auth";
 import initTranslations from "../i18n";
 import TranslationsProvider from "@/langSwitcher/TranslationProvider";
+import ReduxProvider from '../store/storeProvider'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,15 +22,16 @@ export default async function RootLayout({
 }>) {
   const { t,resources } = await initTranslations(locale, ['common']) 
   const session = await getServerSession();
- 
   return (
     <html lang="en">
-        <body className={inter.className}>
+      <body className={inter.className}>        
         <TranslationsProvider resources={resources} locale={locale} namespaces={['common']}>
+         <ReduxProvider>
         <AuthProvider session={session}>
-        <MatchMediaWrapper/>
+            <MatchMediaWrapper />             
           {children}
-          </AuthProvider>
+            </AuthProvider>
+            </ReduxProvider>
           </TranslationsProvider>
       </body>
      

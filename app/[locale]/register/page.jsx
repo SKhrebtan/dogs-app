@@ -36,7 +36,7 @@ export default function Register() {
         },
         body: JSON.stringify({ email, password }),
       });
-
+      console.log(res);
       if (res.status === 400) {
         setError("This email is already registered!");
       }

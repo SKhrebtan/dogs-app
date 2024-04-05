@@ -4,11 +4,9 @@ import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect } from "react";
-
 export default function Login() {
   const [error, setError] = useState("");
   const router = useRouter();
-  // const session = useSession();
   const { data: session, status: sessionStatus } = useSession();
 
   useEffect(() => {

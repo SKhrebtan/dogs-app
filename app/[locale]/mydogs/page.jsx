@@ -1,20 +1,26 @@
-import authOptions from "@/app/api/auth/authOptions";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import { getAllUserDogs } from "@/app/api/httprequests";
+"use client";
 
 import DogsList from "../../components/DogsList";
+import { useGetDogsQuery } from "../../store/dogs/dogsSlice";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
-export default async function Mydogs() {
-  const session = await getServerSession(authOptions);
-  console.log(session);
-  if (!session || !session.user.token) {
+export default function Mydogs() {
+  const { data, refetch, error, isLoading } = useGetDogsQuery();
+  const { data: session } = useSession();
+
+  if (!session) {
     redirect("/");
   }
-  const dogs = await getAllUserDogs();
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   return (
-    <div className="flex min-h-screen flex-col items-center p-24 justify-between">
-      <DogsList dogs={dogs} />
+    <div className="">
+      {isLoading && <h1>Loading....</h1>}
+      {data && <DogsList dogs={data} page="mydogs" />}
+      {error && <h1>Something went wrong....</h1>}
     </div>
   );
 }

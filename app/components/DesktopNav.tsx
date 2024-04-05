@@ -18,13 +18,14 @@ const DesktopNav = () => {
                     <Link href='/'>
                         <li className={`${pathname === `/${language}` ? 'text-fuchsia-500 underline underline-offset-8' : ''} `}>{t('home')}</li>
                     </Link>
-                      </div>
-                    <div className='flex items-center gap-10'>
-                    {session && <Link href='/mydogs'>
+                    {session && <Link className="ml-5" href='/mydogs'>
                        <li
                             className={`${pathname === `/${language}/mydogs`? 'text-fuchsia-500 underline underline-offset-8': '' } `}
                         >{t('mydogs')}</li>
-                    </Link>}     
+                    </Link>} 
+                      </div>
+                    <div className='flex items-center gap-10'>
+                        
                     <LangBtnList/>
                     {!session ? (
                         <>
