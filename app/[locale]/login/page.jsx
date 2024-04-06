@@ -11,7 +11,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const router = useRouter();
   const { data: session, status: sessionStatus } = useSession();
-  console.log(session);
+
   useEffect(() => {
     if (sessionStatus === "authenticated") {
       session.user.token && dispatch(setCurrentToken(session.user.token));
@@ -20,9 +20,6 @@ export default function Login() {
       } else {
         router.replace("/mydogs");
       }
-      // session.user.role === "admin"
-      //   ? router.replace("/dashboard")
-      //   : router.replace("/mydogs");
     }
   }, [sessionStatus, router, session]);
 

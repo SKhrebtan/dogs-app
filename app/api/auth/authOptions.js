@@ -40,7 +40,6 @@ const authOptions = {
   callbacks: {
     async signIn({ user, account, session }) {
       if (account?.provider === "credentials") {
-        // console.log(user);
         return user;
       }
     },
@@ -55,7 +54,6 @@ const authOptions = {
       if (token?.id) session.user.id = token.id;
       if (token?.token) session.user.token = token.token;
       if (token?.role) session.user.role = token.role;
-      // console.log(session);
       return session;
     },
     async logout() {

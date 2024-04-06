@@ -29,9 +29,6 @@ const DogForm = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-
-      console.log(response.data);
-
       setSubmitting(false);
     } catch (error) {
       console.error(error);
