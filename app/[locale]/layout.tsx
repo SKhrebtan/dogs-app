@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import initTranslations from "../i18n";
 import TranslationsProvider from "@/langSwitcher/TranslationProvider";
 import ReduxProvider from '../store/storeProvider'
+import authOptions from "../api/auth/authOptions";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const { t,resources } = await initTranslations(locale, ['common']) 
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang="en">
