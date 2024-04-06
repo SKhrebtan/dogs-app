@@ -40,13 +40,15 @@ const authOptions = {
   callbacks: {
     async signIn({ user, account, session }) {
       if (account?.provider === "credentials") {
-        return true;
+        console.log(user);
+        return user;
       }
     },
     async jwt({ token, user }) {
       if (user?.id) token.id = user.id;
       if (user?.token) token.token = user.token;
       if (user?.role) token.role = user.role;
+
       return token;
     },
     async session({ session, token, user }) {
@@ -60,6 +62,7 @@ const authOptions = {
         setAuthHeader("");
       }
     },
+    secret: process.env.NEXTAUTH_SECRET,
     strategy: "jwt",
   },
 };
