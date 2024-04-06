@@ -48,13 +48,14 @@ const authOptions = {
       if (user?.id) token.id = user.id;
       if (user?.token) token.token = user.token;
       if (user?.role) token.role = user.role;
-
+      console.log(token);
       return token;
     },
     async session({ session, token, user }) {
       if (token?.id) session.user.id = token.id;
       if (token?.token) session.user.token = token.token;
       if (token?.role) session.user.role = token.role;
+      console.log(session);
       return session;
     },
     async logout() {
