@@ -19,6 +19,20 @@ export const dogsApi = createApi({
       query: () => `/dogs`,
       providesTags: ["Dogs"],
     }),
+    getOneDog: builder.query({
+      query: (id) => ({
+        url: `/dogs/dog/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Dogs"],
+    }),
+    getOneDogFromAll: builder.query({
+      query: (id) => ({
+        url: `/alldogs/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Dogs"],
+    }),
     addDog: builder.mutation({
       query: (newDog) => ({
         url: "/dogs",
@@ -37,5 +51,10 @@ export const dogsApi = createApi({
   }),
 });
 
-export const { useGetDogsQuery, useAddDogMutation, useDeleteDogMutation } =
-  dogsApi;
+export const {
+  useGetDogsQuery,
+  useAddDogMutation,
+  useDeleteDogMutation,
+  useGetOneDogQuery,
+  useGetOneDogFromAllQuery,
+} = dogsApi;
