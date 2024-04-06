@@ -3,5 +3,6 @@
     "home": "Home",
     "mydogs": "My Dogs",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "dashboard": "Dashboard"
 }

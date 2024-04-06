@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Axios = axios.create({
+export const Axios = axios.create({
   baseURL: "https://nest-postgres-dogs.onrender.com/",
 });
 

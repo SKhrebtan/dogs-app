@@ -5,17 +5,18 @@ import { useDispatch } from "react-redux";
 import { OneDog } from "./OneDog";
 import { setCurrentToken } from "../store//auth/authSlice";
 import { useSession } from "next-auth/react";
+import { setAuthHeader } from "../api/httprequests";
 
 const DogsList = ({ dogs, page }) => {
   const dispatch = useDispatch();
   const { data } = useSession();
-  console.log(data);
+
   useEffect(() => {
     if (!data?.user?.token) {
       dispatch(setCurrentToken(null));
       return;
     }
-
+    data.user.token && setAuthHeader(data.user.token);
     data.user.token && dispatch(setCurrentToken(data.user.token));
   }, [data]);
 

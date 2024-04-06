@@ -11,7 +11,7 @@ type HomeProps = {
 
 export default async function Home({ params }: HomeProps) {
   const session = await getServerSession();
-  console.log(session)
+
   const { t } = await initTranslations(params.locale, ['common']) 
   const dogs = await getAllDogs()
   return (    

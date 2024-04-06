@@ -12,6 +12,8 @@ const dispatch = useDispatch()
     const pathname = usePathname();
     
     const { data: session } = useSession();
+
+    const user: any = session?.user;
     return (
         <div className='h-[45px]'>
             <ul className='flex justify-between m-10 items-center'>
@@ -19,16 +21,21 @@ const dispatch = useDispatch()
                     <Link href='/'>
                         <li className={`${pathname === `/${language}` ? 'text-fuchsia-500 underline underline-offset-8' : ''} `}>{t('home')}</li>
                     </Link>
-                    {session && <Link className="ml-5" href='/mydogs'>
+                    {user && <Link className="ml-5" href='/mydogs'>
                        <li
                             className={`${pathname === `/${language}/mydogs`? 'text-fuchsia-500 underline underline-offset-8': '' } `}
                         >{t('mydogs')}</li>
+                    </Link>}
+                    {user?.role === 'admin' && <Link className="ml-5" href='/dashboard'>
+                       <li
+                            className={`${pathname === `/${language}/dashboard`? 'text-fuchsia-500 underline underline-offset-8': '' } `}
+                        >{t('dashboard')}</li>
                     </Link>} 
                       </div>
                     <div className='flex items-center gap-10'>
                         
                     <LangBtnList/>
-                    {!session ? (
+                    {!user ? (
                         <>
                         <Link href='/login'>
                         <li className={`${pathname === `/${language}/login`? 'text-fuchsia-500 underline underline-offset-8': '' } `}>Login</li>
@@ -39,7 +46,7 @@ const dispatch = useDispatch()
                         </>
                     ) :
                         <>
-                            {session.user?.email}
+                            {user?.email}
                             <li>
                                 <button
                                     onClick={() => {

@@ -41,7 +41,7 @@ const authOptions = {
   callbacks: {
     async signIn({ user, account, session }) {
       if (account?.provider === "credentials") {
-        console.log(user);
+        // console.log(user);
         return user;
       }
     },
@@ -49,14 +49,14 @@ const authOptions = {
       if (user?.id) token.id = user.id;
       if (user?.token) token.token = user.token;
       if (user?.role) token.role = user.role;
-      console.log(token);
+
       return token;
     },
     async session({ session, token, user }) {
       if (token?.id) session.user.id = token.id;
       if (token?.token) session.user.token = token.token;
       if (token?.role) session.user.role = token.role;
-      console.log(session);
+      // console.log(session);
       return session;
     },
     async logout() {
@@ -64,6 +64,7 @@ const authOptions = {
         setAuthHeader("");
       }
     },
+
     secret: process.env.NEXTAUTH_SECRET,
     strategy: "jwt",
   },
