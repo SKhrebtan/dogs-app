@@ -3,7 +3,7 @@ import { Account, User as AuthUser } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { setAuthHeader } from "../httprequests";
-
+import NextAuth from "next-auth";
 const authOptions = {
   providers: [
     CredentialsProvider({
@@ -66,6 +66,7 @@ const authOptions = {
     },
     secret: process.env.NEXTAUTH_SECRET,
     strategy: "jwt",
+    basePath: "/auth",
   },
 };
 

@@ -21,7 +21,7 @@ const dispatch = useDispatch()
                     <Link href='/'>
                         <li className={`${pathname === `/${language}` ? 'text-fuchsia-500 underline underline-offset-8' : ''} `}>{t('home')}</li>
                     </Link>
-                    {user && <Link className="ml-5" href='/mydogs'>
+                    {user?.role === 'user' && <Link className="ml-5" href='/mydogs'>
                        <li
                             className={`${pathname === `/${language}/mydogs`? 'text-fuchsia-500 underline underline-offset-8': '' } `}
                         >{t('mydogs')}</li>
