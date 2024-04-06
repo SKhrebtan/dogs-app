@@ -1,19 +1,30 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setCurrentToken } from "../../store/auth/authSlice";
 export default function Login() {
+  const dispatch = useDispatch();
   const [error, setError] = useState("");
   const router = useRouter();
   const { data: session, status: sessionStatus } = useSession();
-
+  console.log(session);
   useEffect(() => {
     if (sessionStatus === "authenticated") {
-      router.replace("/");
+      session.user.token && dispatch(setCurrentToken(session.user.token));
+      if (session.user.role === "admin") {
+        router.replace("/dashboard");
+      } else {
+        router.replace("/mydogs");
+      }
+      // session.user.role === "admin"
+      //   ? router.replace("/dashboard")
+      //   : router.replace("/mydogs");
     }
-  }, [sessionStatus, router]);
+  }, [sessionStatus, router, session]);
 
   const isValidEmail = (email) => {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -30,7 +41,7 @@ export default function Login() {
       return setError("Password is invalid");
 
     const res = await signIn("credentials", {
-      redirect: false,
+      redirect: "false",
       email,
       password,
     });

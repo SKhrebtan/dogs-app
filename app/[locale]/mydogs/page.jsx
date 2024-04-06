@@ -1,5 +1,4 @@
 "use client";
-
 import DogsList from "../../components/DogsList";
 import { useGetDogsQuery } from "../../store/dogs/dogsSlice";
 import { useEffect } from "react";
@@ -8,7 +7,7 @@ import { redirect } from "next/navigation";
 
 export default function Mydogs() {
   const { data, refetch, error, isLoading } = useGetDogsQuery();
-  const { data: session, status, update } = useSession();
+  const { data: session } = useSession();
 
   if (!session) {
     redirect("/");

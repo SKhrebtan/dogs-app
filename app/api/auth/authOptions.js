@@ -30,7 +30,6 @@ const authOptions = {
           ).then((response) => response.json());
           if (user.statusCode === 401)
             throw new Error("User or password is incorrect");
-
           return user;
         } catch (error) {
           throw new Error(error.message);
@@ -64,7 +63,9 @@ const authOptions = {
         setAuthHeader("");
       }
     },
-
+    pages: {
+      signIn: "/login",
+    },
     secret: process.env.NEXTAUTH_SECRET,
     strategy: "jwt",
   },
