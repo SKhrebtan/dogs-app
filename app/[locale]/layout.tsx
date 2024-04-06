@@ -22,7 +22,7 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const { t,resources } = await initTranslations(locale, ['common']) 
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang="en">
