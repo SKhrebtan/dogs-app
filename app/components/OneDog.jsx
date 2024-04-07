@@ -8,12 +8,13 @@ import { usePathname } from "next/navigation";
 export const OneDog = ({ breed, name, image, page, id, dataDogs = [] }) => {
   const router = usePathname();
   const {
+    t,
     i18n: { language },
   } = useTranslation();
   return (
     <li className="hover:shadow-md hover:shadow-gray-500 transition duration-300">
       <Link href={`${router}/${String(id)}`}>
-        <div className="h-64 relative">
+        <div className="h-[360px] relative">
           <Image
             priority
             src={image}
@@ -28,8 +29,12 @@ export const OneDog = ({ breed, name, image, page, id, dataDogs = [] }) => {
       </Link>
       <div className="flex flex-row justify-between p-[10px]">
         <div>
-          <p>Name: {name}</p>
-          <p>Breed: {breed}</p>
+          <p>
+            {t("name")}: {name}
+          </p>
+          <p>
+            {t("breed")}: {breed}
+          </p>
         </div>
 
         <DogButton

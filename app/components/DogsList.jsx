@@ -6,11 +6,10 @@ import { OneDog } from "./OneDog";
 import { setCurrentToken } from "../store//auth/authSlice";
 import { useSession } from "next-auth/react";
 import { setAuthHeader } from "../api/httprequests";
-import { usePathname } from "next/navigation";
+
 const DogsList = ({ dogs, page }) => {
   const dispatch = useDispatch();
   const { data } = useSession();
-  const router = usePathname();
   const { data: dataDogs } = useGetDogsQuery();
 
   useEffect(() => {
@@ -23,8 +22,8 @@ const DogsList = ({ dogs, page }) => {
   }, [data]);
 
   return (
-    <div className=" p-[20px]">
-      <ul className="grid gap-4 grid-cols-4">
+    <div className="p-[20px]">
+      <ul className="grid gap-4 tablet:grid-cols-2 desktop:grid-cols-4">
         {dogs?.map(({ id, name, breed, image }) => (
           <OneDog
             dataDogs={dataDogs}
