@@ -19,6 +19,10 @@ export const dogsApi = createApi({
       query: () => `/dogs`,
       providesTags: ["Dogs"],
     }),
+    getAllDogs: builder.query({
+      query: () => `/alldogs/alldogs`,
+      providesTags: ["Dogs"],
+    }),
     getOneDog: builder.query({
       query: (id) => ({
         url: `/dogs/dog/${id}`,
@@ -53,6 +57,7 @@ export const dogsApi = createApi({
 
 export const {
   useGetDogsQuery,
+  useGetAllDogsQuery,
   useAddDogMutation,
   useDeleteDogMutation,
   useGetOneDogQuery,

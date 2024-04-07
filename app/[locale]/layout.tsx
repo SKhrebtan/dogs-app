@@ -27,14 +27,15 @@ export default async function RootLayout({
   return (
     <html lang={locale} className="p-0 m-0">
       <body className={inter.className}>        
-        <TranslationsProvider resources={resources} locale={locale} namespaces={['common']}>
+       
          <ReduxProvider>
-        <AuthProvider session={session}>
+          <AuthProvider session={session}>
+             <TranslationsProvider resources={resources} locale={locale} namespaces={['common']}>
             <MatchMediaWrapper />             
-          {children}
+              {children}
+              </TranslationsProvider>
             </AuthProvider>
             </ReduxProvider>
-          </TranslationsProvider>
       </body>
      
     </html>

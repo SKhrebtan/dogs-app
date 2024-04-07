@@ -22,15 +22,15 @@ const LangBtnList = () => {
        if (
       currentLocale === i18nConfig.defaultLocale &&
       !i18nConfig.prefixDefault
-    ) {
+       ) {
       router.push('/' + newLocale + currentPathname);
-    } else {
+       } else {
       router.push(
         currentPathname.replace(`/${currentLocale}`, `/${newLocale}`)
       );
     }
 
-    // router.refresh();
+    router.refresh();
   };
   
     return(
