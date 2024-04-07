@@ -30,7 +30,7 @@ const LangBtnList = () => {
       );
     }
 
-    router.refresh();
+    // router.refresh();
   };
   
     return(

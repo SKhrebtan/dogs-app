@@ -93,7 +93,7 @@ const dispatch = useDispatch()
           </AnimatePresence>
                 
                 
-            <div className="flex flex-row justify-end p-[20px] bg-blue-300">
+            <div className="flex flex-row justify-end p-[10px] bg-blue-300">
             <BurgerSvg
                 onClick={handleMenu}
                 className="fill-yellow-500"
