@@ -4,5 +4,7 @@
     "mydogs": "Мої песики",
     "login": "Логін",
     "register": "Реєстрація",
-    "dashboard": "Адмінка"
+    "dashboard": "Адмінка",
+    "name" : "Ім'я",
+    "breed" : "Порода"
 }

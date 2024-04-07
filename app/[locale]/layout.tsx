@@ -25,7 +25,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang="en">
+    <html lang="en" className="p-0 m-0">
       <body className={inter.className}>        
         <TranslationsProvider resources={resources} locale={locale} namespaces={['common']}>
          <ReduxProvider>

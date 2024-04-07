@@ -30,11 +30,11 @@ const LangBtnList = () => {
       );
     }
 
-    router.refresh();
+    // router.refresh();
   };
   
     return(
-<>
+<div className='flex flex-row gap-4 '>
         <button
           value='en'
           type="button"
@@ -54,7 +54,7 @@ const LangBtnList = () => {
         >
         UA
       </button>
-             </>
+             </div>
     )
 }
 

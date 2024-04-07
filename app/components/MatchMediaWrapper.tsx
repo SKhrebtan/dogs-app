@@ -8,7 +8,7 @@ import MobileNav from './MobileNav';
 export const MatchMediaWrapper = () => {
     const [isNarrowScreen, setIsNarrowScreen] = useState<boolean>(false);
      useEffect(() => {
-    const mediaWatcher = window.matchMedia("(max-width: 420px)");
+    const mediaWatcher = window.matchMedia("(max-width: 768px)");
     setIsNarrowScreen(mediaWatcher.matches);
     function updateIsNarrowScreen(e: MediaQueryListEvent) {
       setIsNarrowScreen(e.matches);

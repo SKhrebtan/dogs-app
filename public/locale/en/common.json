@@ -4,5 +4,7 @@
     "mydogs": "My Dogs",
     "login": "Login",
     "register": "Register",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "name" : "Name",
+    "breed" : "Breed"
 }

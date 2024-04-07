@@ -15,8 +15,8 @@ const dispatch = useDispatch()
 
     const user: any = session?.user;
     return (
-        <div className='h-[45px]'>
-            <ul className='flex justify-between m-10 items-center'>
+        <div className='bg-yellow-200 p-[20px]'>
+            <ul className='flex justify-between items-center'>
                 <div className='flex items-center'>
                     <Link href='/'>
                         <li className={`${pathname === `/${language}` ? 'text-fuchsia-500 underline underline-offset-8' : ''} `}>{t('home')}</li>
