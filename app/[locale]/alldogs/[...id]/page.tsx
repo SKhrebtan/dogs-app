@@ -7,13 +7,13 @@ interface Params {
 }
 function OneDogPage({ params:{id} }:{params:Params}) {
   const { data,error} = useGetOneDogFromAllQuery(id[0]);
-  if (error && error?.data.statusCode !== 404) {
+  // if (error && error?.data.statusCode !== 404) {
     
-    return notFound()
-    }
+  //   return notFound()
+  //   }
   return (
     <div>
-      {error && error.data.statusCode === 404 && <h1>{error.data.message}</h1>}
+      {/* {error && error.data.statusCode === 404 && <h1>{error.data.message}</h1>} */}
       {data && <DogDetailsPage dog={data} />}
     </div>
     )
