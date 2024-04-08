@@ -30,7 +30,7 @@ const dispatch = useDispatch()
         setShowMenu(!showMenu)
     }
     return (
-        <>
+        <div className='w-screen h-[50px]'>
              <AnimatePresence>
                 {showMenu && <motion.div
                     initial={{ opacity: 0, x: '100%' }}
@@ -93,13 +93,13 @@ const dispatch = useDispatch()
           </AnimatePresence>
                 
                 {/* <div className='w-screen h-[50px]'></div> */}
-            <div className="flex flex-row w-screen justify-end p-[10px] bg-blue-300">
+            <div className="fixed z-40 flex flex-row w-screen justify-end p-[10px] bg-blue-300">
             <BurgerSvg
                 onClick={handleMenu}
                 className="fill-yellow-500"
                         />
                 </div>
                 
-   </>
+   </div>
 )
 }
