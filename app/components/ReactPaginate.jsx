@@ -33,12 +33,14 @@ export default function PaginatedItems({ dogs, setPages, pages, totalPages }) {
         previousLabel="< previous"
         renderOnZeroPageCount={null}
         previousClassName={`tuzik w-24 h-10 flex items-center justify-center rounded-md ${
-          pages === 1 ? "bg-gray-300 disabled" : "bg-blue-200 hover:bg-blue-400"
+          pages === 1
+            ? "bg-gray-300 cursor-not-allowed"
+            : "bg-blue-200 hover:bg-blue-400 cursor-pointer"
         }`}
         nextClassName={`tuzik w-24 h-10 flex items-center justify-center rounded-md ${
           totalPages === pages
-            ? "bg-gray-300 disabled"
-            : "bg-blue-200 hover:bg-blue-400"
+            ? "bg-gray-300 cursor-not-allowed"
+            : "bg-blue-200 hover:bg-blue-400 cursor-pointer"
         }`}
         containerClassName="flex flex-row justigy-center items-center m-8 gap-[5px]"
         pageClassName="group block border- border-solid border-lightgray hover:bg-teal-500 w-10 h-10 flex items-center justify-center rounded-md"

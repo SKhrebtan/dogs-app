@@ -28,7 +28,6 @@ const DogsList = ({ dogs, page }) => {
     pages,
     itemsPerPage,
   });
-  console.log(narrowData);
   useEffect(() => {
     if (!data) return;
     if (data.totalPages === pages) return;

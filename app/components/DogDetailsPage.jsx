@@ -1,14 +1,15 @@
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+
 const DogDetailsPage = ({ dog }) => {
   const { name, breed, image } = dog;
   const { t } = useTranslation();
-  const router = useRouter();
-  console.log(router);
-  const handleClick = () => {
-    router.back();
-  };
+  const pathname = usePathname();
+  const pathParts = pathname.split("/");
+  const firstPart = pathParts[1];
+  const secondPart = pathParts[2];
   return (
     <div className="p-[20px] flex mobile:flex-col mobile:align-center desktop:flex-row gap-[40px]">
       <div className="mobile:h-[350px] tablet:h-[750px] mobile:w-full desktop:h-[550px] desktop:w-[1050px] p-[20px] relative">
@@ -32,12 +33,15 @@ const DogDetailsPage = ({ dog }) => {
           <p className="text-amber-500 text-3xl">{t("breed")}:</p>
           <p className="text-lime-700 text-3xl">{breed}</p>
         </div>
-        <button
+        <Link
+          href={
+            secondPart === "alldogs" ? `/${firstPart}` : `/${firstPart}/mydogs`
+          }
           className="p-[20px] rounded-md bg-teal-200 hover:bg-teal-600 hover:shadow-lg ease-linear duration-300"
-          onClick={handleClick}
+          // onClick={handleClick}
         >
           {t("back")}
-        </button>
+        </Link>
       </div>
     </div>
   );
