@@ -9,19 +9,34 @@ import { setAuthHeader } from "../api/httprequests";
 import { useGetAllDogsQuery } from "../store/dogs/dogsSlice";
 import { Loader } from "../components/Loader";
 import PaginatedItems from "./ReactPaginate";
+import { useMediaObserver } from "../helpers/useMediaObserver";
+import { useInView } from "react-intersection-observer";
 
 const DogsList = ({ dogs, page }) => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
   const { data: dataDogs } = useGetDogsQuery();
   const [pages, setPages] = useState(1);
+  const [narrowData, setNarrowData] = useState([]);
   const itemsPerPage = 8;
-
+  const isNarrowScreen = useMediaObserver();
+  const { ref, inView, entry } = useInView({
+    threshold: 0,
+  });
   const { data, isLoading, error } = useGetAllDogsQuery({
     pages,
     itemsPerPage,
   });
-
+  console.log(narrowData);
+  useEffect(() => {
+    if (!data) return;
+    if (data.totalPages === pages) return;
+    setPages(pages + 1);
+  }, [inView]);
+  useEffect(() => {
+    if (!data) return;
+    setNarrowData((prevData) => [...prevData, ...data.dogs]);
+  }, [data]);
   useEffect(() => {
     if (!session?.user?.token) {
       dispatch(setCurrentToken(null));
@@ -40,21 +55,22 @@ const DogsList = ({ dogs, page }) => {
       )}
       {error && error.status === 404 && <h1>{error.message}</h1>}
       <ul className="grid gap-4 tablet:grid-cols-2 desktop:grid-cols-4">
-        {(dogs.length > 0 ? dogs : data && data.dogs)?.map(
-          ({ id, name, breed, image }) => (
-            <OneDog
-              dataDogs={dataDogs}
-              key={id}
-              id={id}
-              name={name}
-              breed={breed}
-              image={image}
-              page={page}
-            />
-          )
-        )}
+        {(dogs.length > 0
+          ? dogs
+          : data && (isNarrowScreen ? narrowData : data.dogs)
+        )?.map(({ id, name, breed, image }) => (
+          <OneDog
+            dataDogs={dataDogs}
+            key={id}
+            id={id}
+            name={name}
+            breed={breed}
+            image={image}
+            page={page}
+          />
+        ))}
       </ul>
-      {page === "home" && data && (
+      {page === "home" && data && !isNarrowScreen && (
         <PaginatedItems
           dogs={data.allDogs}
           pages={pages}
@@ -62,6 +78,7 @@ const DogsList = ({ dogs, page }) => {
           totalPages={data.totalPages}
         />
       )}
+      {isNarrowScreen && !isLoading && <div ref={ref}></div>}
     </div>
   );
 };

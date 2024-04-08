@@ -43,6 +43,7 @@ export default function PaginatedItems({ dogs, setPages, pages, totalPages }) {
         containerClassName="flex flex-row justigy-center items-center m-8 gap-[5px]"
         pageClassName="group block border- border-solid border-lightgray hover:bg-teal-500 w-10 h-10 flex items-center justify-center rounded-md"
         activeClassName="bg-blue-500 text-white"
+        forcePage={pages - 1}
       />
     </div>
   );
