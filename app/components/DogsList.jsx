@@ -1,17 +1,21 @@
 "use client";
 import { useGetDogsQuery } from "../store/dogs/dogsSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { OneDog } from "./OneDog";
 import { setCurrentToken } from "../store//auth/authSlice";
 import { useSession } from "next-auth/react";
 import { setAuthHeader } from "../api/httprequests";
 import { useGetAllDogsQuery } from "../store/dogs/dogsSlice";
+import { Loader } from "../components/Loader";
+import PaginatedItems from "./ReactPaginate";
+
 const DogsList = ({ dogs, page }) => {
+  const [currentItems, setCurrentItems] = useState([]);
   const dispatch = useDispatch();
   const { data } = useSession();
   const { data: dataDogs } = useGetDogsQuery();
-  const { data: allDogs, isLoading } = useGetAllDogsQuery();
+  const { data: allDogs, isLoading, error } = useGetAllDogsQuery();
   useEffect(() => {
     if (!data?.user?.token) {
       dispatch(setCurrentToken(null));
@@ -23,9 +27,14 @@ const DogsList = ({ dogs, page }) => {
 
   return (
     <div className="p-[20px]">
-      {isLoading && <h1>Loading...</h1>}
+      {isLoading && (
+        <div className="w-screen flex flex-row justify-center">
+          <Loader />
+        </div>
+      )}
+      {error && error.status === 404 && <h1>{error.message}</h1>}
       <ul className="grid gap-4 tablet:grid-cols-2 desktop:grid-cols-4">
-        {(dogs.length > 0 ? dogs : allDogs)?.map(
+        {(dogs.length > 0 ? dogs : currentItems)?.map(
           ({ id, name, breed, image }) => (
             <OneDog
               dataDogs={dataDogs}
@@ -39,6 +48,9 @@ const DogsList = ({ dogs, page }) => {
           )
         )}
       </ul>
+      {page === "home" && (
+        <PaginatedItems dogs={allDogs} setCurrentItems={setCurrentItems} />
+      )}
     </div>
   );
 };

@@ -6,5 +6,6 @@
     "register": "Register",
     "dashboard": "Dashboard",
     "name" : "Name",
-    "breed" : "Breed"
+    "breed" : "Breed",
+    "back" : "Back"
 }
