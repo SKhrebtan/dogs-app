@@ -22,7 +22,7 @@ const dispatch = useDispatch()
         if (showMenu) {
          document.body.style.overflow = 'hidden';
         } else {
-              document.body.style.overflow = 'auto';
+       document.body.style.overflow = 'auto';
     }
 },[showMenu])
     const user: any = session?.user;
@@ -34,10 +34,10 @@ const dispatch = useDispatch()
              <AnimatePresence>
                 {showMenu && <motion.div
                     initial={{ opacity: 0, x: '100%' }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: '100%' }}
-          transition={{ duration: 0.3 }}
-                    className='fixed z-50 h-screen w-screen bg-yellow-100'>
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: '100%' }}
+                    transition={{ duration: 0.3 }}
+                    className={`fixed z-50 h-screen w-screen bg-yellow-100 ${showMenu ? 'overflow-hidden': 'overflow-auto'}`}>
                 <CloseSvg
                     onClick={() => setShowMenu(false)}
                     className="absolute right-[25px] top-[25px] hover:fill-blue-300 hover:rotate-180 ease-linear duration-300 cursor-pointer" />
@@ -92,13 +92,14 @@ const dispatch = useDispatch()
             </motion.div>}
           </AnimatePresence>
                 
-                
-            <div className="flex flex-row justify-end p-[10px] bg-blue-300">
+                {/* <div className='w-screen h-[50px]'></div> */}
+            <div className="flex flex-row w-screen justify-end p-[10px] bg-blue-300">
             <BurgerSvg
                 onClick={handleMenu}
                 className="fill-yellow-500"
                         />
-        </div>
+                </div>
+                
    </>
 )
 }

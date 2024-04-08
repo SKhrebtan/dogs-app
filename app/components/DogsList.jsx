@@ -10,7 +10,8 @@ import { useGetAllDogsQuery } from "../store/dogs/dogsSlice";
 import { Loader } from "../components/Loader";
 import PaginatedItems from "./ReactPaginate";
 import { useMediaObserver } from "../helpers/useMediaObserver";
-import { useInView } from "react-intersection-observer";
+import { useInView, InView } from "react-intersection-observer";
+import { motion, AnimatePresence } from "framer-motion";
 
 const DogsList = ({ dogs, page }) => {
   const dispatch = useDispatch();
@@ -59,15 +60,26 @@ const DogsList = ({ dogs, page }) => {
           ? dogs
           : data && (isNarrowScreen ? narrowData : data.dogs)
         )?.map(({ id, name, breed, image }) => (
-          <OneDog
-            dataDogs={dataDogs}
-            key={id}
-            id={id}
-            name={name}
-            breed={breed}
-            image={image}
-            page={page}
-          />
+          <InView key={id}>
+            {({ ref, inView }) => (
+              <motion.div
+                ref={ref}
+                initial={{ opacity: 0, x: "100%" }}
+                animate={{ opacity: inView ? 1 : 0, x: inView ? "0" : "100%" }}
+                transition={{ duration: 1.25 }}
+              >
+                <OneDog
+                  dataDogs={dataDogs}
+                  key={id}
+                  id={id}
+                  name={name}
+                  breed={breed}
+                  image={image}
+                  page={page}
+                />
+              </motion.div>
+            )}
+          </InView>
         ))}
       </ul>
       {page === "home" && data && !isNarrowScreen && (
