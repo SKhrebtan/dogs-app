@@ -11,9 +11,14 @@ export const OneDog = ({ breed, name, image, page, id, dataDogs = [] }) => {
     t,
     i18n: { language },
   } = useTranslation();
+
+  const urlPath =
+    page === "home"
+      ? `${router}/alldogs/${String(id)}`
+      : `${router}/${String(id)}`;
   return (
     <li className="hover:shadow-md hover:shadow-gray-500 transition duration-300">
-      <Link href={`${router}/${String(id)}`}>
+      <Link href={urlPath}>
         <div className="h-[360px] relative">
           <Image
             priority

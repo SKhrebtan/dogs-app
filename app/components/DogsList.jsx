@@ -11,7 +11,7 @@ const DogsList = ({ dogs, page }) => {
   const dispatch = useDispatch();
   const { data } = useSession();
   const { data: dataDogs } = useGetDogsQuery();
-  const { data: allDogs } = useGetAllDogsQuery();
+  const { data: allDogs, isLoading } = useGetAllDogsQuery();
   useEffect(() => {
     if (!data?.user?.token) {
       dispatch(setCurrentToken(null));
@@ -23,6 +23,7 @@ const DogsList = ({ dogs, page }) => {
 
   return (
     <div className="p-[20px]">
+      {isLoading && <h1>Loading...</h1>}
       <ul className="grid gap-4 tablet:grid-cols-2 desktop:grid-cols-4">
         {(dogs.length > 0 ? dogs : allDogs)?.map(
           ({ id, name, breed, image }) => (

@@ -22,8 +22,6 @@ export const DogButton = ({ dog, page, id, children, dataDogs }) => {
     if (page === "mydogs") {
       await deleteContact(id);
     } else {
-      console.log(token);
-      console.log(role);
       if (role === "admin") {
         await deleteDogFromAdminList(token, id);
         return;
