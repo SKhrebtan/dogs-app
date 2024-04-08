@@ -20,7 +20,8 @@ export const dogsApi = createApi({
       providesTags: ["Dogs"],
     }),
     getAllDogs: builder.query({
-      query: () => `/alldogs/alldogs`,
+      query: ({ pages, itemsPerPage = 5 }) =>
+        `/alldogs/pagination?page=${pages}&limit=${itemsPerPage}`,
       providesTags: ["Dogs"],
     }),
     getOneDog: builder.query({

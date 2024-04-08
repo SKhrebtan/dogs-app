@@ -11,19 +11,25 @@ import { Loader } from "../components/Loader";
 import PaginatedItems from "./ReactPaginate";
 
 const DogsList = ({ dogs, page }) => {
-  const [currentItems, setCurrentItems] = useState([]);
   const dispatch = useDispatch();
-  const { data } = useSession();
+  const { data: session } = useSession();
   const { data: dataDogs } = useGetDogsQuery();
-  const { data: allDogs, isLoading, error } = useGetAllDogsQuery();
+  const [pages, setPages] = useState(1);
+  const itemsPerPage = 8;
+
+  const { data, isLoading, error } = useGetAllDogsQuery({
+    pages,
+    itemsPerPage,
+  });
+
   useEffect(() => {
-    if (!data?.user?.token) {
+    if (!session?.user?.token) {
       dispatch(setCurrentToken(null));
       return;
     }
-    data.user.token && setAuthHeader(data.user.token);
-    data.user.token && dispatch(setCurrentToken(data.user.token));
-  }, [data]);
+    session.user.token && setAuthHeader(session.user.token);
+    session.user.token && dispatch(setCurrentToken(session.user.token));
+  }, [session]);
 
   return (
     <div className="p-[20px]">
@@ -34,7 +40,7 @@ const DogsList = ({ dogs, page }) => {
       )}
       {error && error.status === 404 && <h1>{error.message}</h1>}
       <ul className="grid gap-4 tablet:grid-cols-2 desktop:grid-cols-4">
-        {(dogs.length > 0 ? dogs : currentItems)?.map(
+        {(dogs.length > 0 ? dogs : data && data.dogs)?.map(
           ({ id, name, breed, image }) => (
             <OneDog
               dataDogs={dataDogs}
@@ -48,8 +54,13 @@ const DogsList = ({ dogs, page }) => {
           )
         )}
       </ul>
-      {page === "home" && (
-        <PaginatedItems dogs={allDogs} setCurrentItems={setCurrentItems} />
+      {page === "home" && data && (
+        <PaginatedItems
+          dogs={data.allDogs}
+          pages={pages}
+          setPages={setPages}
+          totalPages={data.totalPages}
+        />
       )}
     </div>
   );
