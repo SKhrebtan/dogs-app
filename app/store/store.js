@@ -13,17 +13,18 @@ import {
   REGISTER,
 } from "redux-persist";
 import { dogsApi } from "./dogs/dogsSlice";
-
+import { userApi } from "./user/userSlice";
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["token"],
+  whitelist: ["token", "avatar"],
 };
 export const store = configureStore(
   {
     reducer: {
       auth: persistReducer(authPersistConfig, authReducer),
       [dogsApi.reducerPath]: dogsApi.reducer,
+      [userApi.reducerPath]: userApi.reducer,
     },
     middleware: (getDefaultMiddleware) => [
       ...getDefaultMiddleware({
@@ -32,6 +33,7 @@ export const store = configureStore(
         },
       }),
       dogsApi.middleware,
+      userApi.middleware,
     ],
   },
   applyMiddleware(thunk)

@@ -7,5 +7,6 @@
     "dashboard": "Dashboard",
     "name" : "Name",
     "breed" : "Breed",
-    "back" : "Back"
+    "back" : "Back",
+    "updateAvatar": "Update avatar"
 }

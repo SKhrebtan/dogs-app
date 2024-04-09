@@ -47,6 +47,7 @@ const authOptions = {
       if (user?.id) token.id = user.id;
       if (user?.token) token.token = user.token;
       if (user?.role) token.role = user.role;
+      if (user?.avatar) token.avatar = user.avatar;
 
       return token;
     },
@@ -54,6 +55,7 @@ const authOptions = {
       if (token?.id) session.user.id = token.id;
       if (token?.token) session.user.token = token.token;
       if (token?.role) session.user.role = token.role;
+      if (token?.avatar) session.user.avatar = token.avatar;
       return session;
     },
     async logout() {

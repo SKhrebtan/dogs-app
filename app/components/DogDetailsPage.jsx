@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useUpdateDogMutation } from "../store/dogs/dogsSlice";
 const DogDetailsPage = ({ dog }) => {
   const { id, name, breed, image } = dog;
-  console.log(id);
   const [edit, setEdit] = useState(false);
   const [updateDog] = useUpdateDogMutation();
   const { t } = useTranslation();
