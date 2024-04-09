@@ -12,7 +12,7 @@ export const dogsApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Dogs"],
+  tagTypes: ["Dogs", "Dog"],
 
   endpoints: (builder) => ({
     getDogs: builder.query({
@@ -29,14 +29,14 @@ export const dogsApi = createApi({
         url: `/dogs/dog/${id}`,
         method: "GET",
       }),
-      providesTags: ["Dogs"],
+      providesTags: ["Dog"],
     }),
     getOneDogFromAll: builder.query({
       query: (id) => ({
         url: `/alldogs/${id}`,
         method: "GET",
       }),
-      providesTags: ["Dogs"],
+      providesTags: ["Dog"],
     }),
     addDog: builder.mutation({
       query: (newDog) => ({
@@ -53,6 +53,14 @@ export const dogsApi = createApi({
       }),
       invalidatesTags: ["Dogs"],
     }),
+    updateDog: builder.mutation({
+      query: ({ id, updatedDog }) => ({
+        url: `dogs/dog/${id}`,
+        method: "PATCH",
+        body: updatedDog,
+      }),
+      invalidatesTags: ["Dog"],
+    }),
   }),
 });
 
@@ -61,6 +69,7 @@ export const {
   useGetAllDogsQuery,
   useAddDogMutation,
   useDeleteDogMutation,
+  useUpdateDogMutation,
   useGetOneDogQuery,
   useGetOneDogFromAllQuery,
 } = dogsApi;
