@@ -11,6 +11,7 @@ import BurgerSvg from "../../assets/images/burger.svg";
 import CloseSvg from "../../assets/images/close.svg";
 import { motion, AnimatePresence } from "framer-motion";
 import { Avatar } from "./Avatar";
+import { ModeSwitcher } from "../components/ModeSwitcher";
 
 export default function MobileNav() {
   const [showMenu, setShowMenu] = useState(false);
@@ -118,6 +119,7 @@ export default function MobileNav() {
                   </div>
                 ) : (
                   <div className="flex flex-row items-center gap-[10px]">
+                    <ModeSwitcher />
                     {user?.email}
                     <Avatar />
                     <button

@@ -8,6 +8,8 @@ import { setCurrentToken } from "../store/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useUpdateAvatarMutation } from "../store/user/userSlice";
 import { Avatar } from "./Avatar";
+import { ModeSwitcher } from "../components/ModeSwitcher";
+
 const DesktopNav = () => {
   const [updateAvatar] = useUpdateAvatarMutation();
   const {
@@ -21,7 +23,7 @@ const DesktopNav = () => {
   const user: any = session?.user;
 
   return (
-    <div className="bg-yellow-200 p-[20px]">
+    <div className="bg-yellow-200 py-[10px] px-[30px]">
       <ul className="flex justify-between items-center">
         <div className="flex items-center">
           <Link href="/">
@@ -91,6 +93,7 @@ const DesktopNav = () => {
             </>
           ) : (
             <>
+              <ModeSwitcher />
               {user?.email}
               <Avatar />
 

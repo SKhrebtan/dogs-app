@@ -3,8 +3,7 @@ import { updateAvatar } from "./operation";
 const initialState = {
   user: { name: null, email: null },
   token: null,
-  avatar:
-    "https://res.cloudinary.com/dwzeqka9z/image/upload/v1712689230/avatars/g5rcnndgoes6z7zumnxy.jpg",
+  avatar: null,
 };
 
 const authSlice = createSlice({

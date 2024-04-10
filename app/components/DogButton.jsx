@@ -58,8 +58,8 @@ export const DogButton = ({ dog, page, id, children, dataDogs }) => {
         onClick={() => handleBtnAction(page, id)}
         className={`${
           isAdded
-            ? "w-10 h-10 text-red-500" // якщо isAdded true, встановити червоний колір
-            : "w-10 h-10 text-gray-500" // якщо isAdded false, встановити сірий колір
+            ? "w-10 h-10 text-red-500"
+            : "w-10 h-10 text-gray-500 dark:text-teal-50"
         }`}
       >
         <Svg />

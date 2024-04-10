@@ -4,12 +4,13 @@ import { useSession } from "next-auth/react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { updateAvatar } from "../store/auth/operation";
-
+import { useMediaObserver } from "../helpers/useMediaObserver";
 export const Avatar = () => {
   const { t } = useTranslation();
   const [showAvatarInfo, setShowAvatarInfo] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const avatarStore = useSelector((state) => state.auth.avatar);
+  const narrowScreen = useMediaObserver();
   const inputRef = useRef(null);
   const { data: session } = useSession();
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export const Avatar = () => {
       dispatch(updateAvatar(formData));
     })();
   }, [selectedAvatar]);
+  console.log(session.user.avatar);
   return (
     <div className="relative">
       <input
@@ -35,16 +37,16 @@ export const Avatar = () => {
         }}
         style={{ display: "none" }}
       />
-      {avatarStore && (
+      {(avatarStore || session.user.avatar) && (
         <Image
           onClick={() => inputRef?.current && inputRef.current.click()}
           onMouseEnter={() => setShowAvatarInfo(true)}
           onMouseLeave={() => setShowAvatarInfo(false)}
-          src={avatarStore}
+          src={avatarStore || session.user.avatar}
           alt={avatarStore}
-          width={40}
-          height={40}
-          className="cursor-pointer rounded-full"
+          width={narrowScreen ? 200 : 40}
+          height={narrowScreen ? 200 : 40}
+          className="relative cursor-pointer rounded-full"
         />
       )}
       {showAvatarInfo && (
