@@ -37,7 +37,7 @@ export const ModeSwitcher = () => {
     <button
       onClick={handleMode}
       type="button"
-      className="relative w-[80px] h-[36px] border-solid border-[1px] border-indigo-200 rounded-md"
+      className="relative w-[80px] h-[36px] border-solid border-[1px] border-indigo-500 bg-blue-100 rounded-md"
     >
       <AnimatePresence>
         {mode === "dark" ? (

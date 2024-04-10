@@ -17,7 +17,7 @@ export const OneDog = ({ breed, name, image, page, id, dataDogs = [] }) => {
       ? `${router}/alldogs/${String(id)}`
       : `${router}/${String(id)}`;
   return (
-    <li className="hover:shadow-md hover:shadow-gray-500 transition duration-300">
+    <li className="hover:shadow-md hover:shadow-gray-500 dark:hover:shadow-white   transition duration-300">
       <Link href={urlPath}>
         <div className="h-[360px] relative">
           <Image
