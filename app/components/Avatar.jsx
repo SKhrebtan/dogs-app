@@ -22,7 +22,7 @@ export const Avatar = () => {
       dispatch(updateAvatar(formData));
     })();
   }, [selectedAvatar]);
-  console.log(session.user.avatar);
+
   return (
     <div className="relative">
       <input

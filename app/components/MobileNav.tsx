@@ -78,7 +78,7 @@ export default function MobileNav() {
                   </Link>
                 )}
                 {user?.role === "admin" && (
-                  <Link onClick={handleMenu} className="ml-5" href="/dashboard">
+                  <Link onClick={handleMenu} href="/dashboard">
                     <li
                       className={`${
                         pathname === `/${language}/dashboard`
@@ -119,22 +119,25 @@ export default function MobileNav() {
                   </div>
                 ) : (
                   <div className="flex flex-row items-center gap-[10px]">
-                    <ModeSwitcher />
-                    {user?.email}
+                    <div className="flex flex-col gap-[10px]">
+                      {user?.email}
+                      <button
+                        onClick={() => {
+                          signOut();
+                          dispatch(setCurrentToken(null));
+                        }}
+                        className="p-[5px] bg-blue-500 rounded-full"
+                        type="button"
+                      >
+                        Logout
+                      </button>
+                    </div>
+
                     <Avatar />
-                    <button
-                      onClick={() => {
-                        signOut();
-                        dispatch(setCurrentToken(null));
-                      }}
-                      className="p-[5px] bg-blue-500 rounded-full"
-                      type="button"
-                    >
-                      Logout
-                    </button>
                   </div>
                 )}
                 <LangBtnList />
+                <ModeSwitcher />
               </div>
             </ul>
           </motion.div>
