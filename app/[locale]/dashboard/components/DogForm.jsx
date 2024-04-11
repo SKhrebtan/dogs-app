@@ -3,8 +3,9 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Axios } from "@/app/api/httprequests";
-
+import { useAddDogAllListMutation } from "@/app/store/dogs/dogsSlice";
 const DogForm = () => {
+  const [addDogAllList, { isLoading }] = useAddDogAllListMutation();
   const initialValues = {
     name: "",
     breed: "",
@@ -23,12 +24,7 @@ const DogForm = () => {
       formData.append("name", values.name);
       formData.append("breed", values.breed);
       formData.append("file", values.file);
-
-      const response = await Axios.post("alldogs/new-dog", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await addDogAllList(formData);
       resetForm();
       setSubmitting(false);
     } catch (error) {
@@ -117,9 +113,13 @@ const DogForm = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
+            className={`inline-block px-4 py-2 rounded focus:outline-none ${
+              isSubmitting
+                ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-700 focus:bg-blue-700"
+            }`}
           >
-            Submit
+            {isLoading ? "Loading..." : "Submit"}
           </button>
         </Form>
       )}

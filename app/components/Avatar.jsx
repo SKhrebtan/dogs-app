@@ -43,7 +43,7 @@ export const Avatar = () => {
           onMouseEnter={() => setShowAvatarInfo(true)}
           onMouseLeave={() => setShowAvatarInfo(false)}
           src={avatarStore || session.user.avatar}
-          alt={avatarStore}
+          alt={avatarStore || session.user.avatar || "avatar"}
           width={narrowScreen ? 200 : 40}
           height={narrowScreen ? 200 : 40}
           className="relative cursor-pointer rounded-full"

@@ -1,17 +1,18 @@
 import {
   useDeleteDogMutation,
   useAddDogMutation,
+  useDeleteDogAllListMutation,
 } from "../store/dogs/dogsSlice";
 import Svg from "../../assets/images/heart-svgrepo-com.svg";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { deleteDogFromAdminList } from "../api/httprequests";
 
 export const DogButton = ({ dog, page, id, children, dataDogs }) => {
   const [isAdded, setIsAdded] = useState(false);
   const { data: sessiondata } = useSession();
   const [deleteContact] = useDeleteDogMutation();
   const [addDog] = useAddDogMutation();
+  const [deleteDogAllList] = useDeleteDogAllListMutation();
 
   useEffect(() => {
     setIsAdded(dataDogs?.find((el) => el.name === dog.name));
@@ -23,7 +24,7 @@ export const DogButton = ({ dog, page, id, children, dataDogs }) => {
       await deleteContact(id);
     } else {
       if (role === "admin") {
-        await deleteDogFromAdminList(token, id);
+        await deleteDogAllList(id);
         return;
       }
       if (isAdded) {

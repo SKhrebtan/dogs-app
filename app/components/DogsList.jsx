@@ -11,7 +11,7 @@ import { Loader } from "../components/Loader";
 import PaginatedItems from "./ReactPaginate";
 import { useMediaObserver } from "../helpers/useMediaObserver";
 import { useInView, InView } from "react-intersection-observer";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const DogsList = ({ dogs, page }) => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const DogsList = ({ dogs, page }) => {
   const [narrowData, setNarrowData] = useState([]);
   const itemsPerPage = 8;
   const isNarrowScreen = useMediaObserver();
-  const { ref, inView, entry } = useInView({
+  const { ref, inView } = useInView({
     threshold: 0,
   });
   const { data, isLoading, error } = useGetAllDogsQuery({

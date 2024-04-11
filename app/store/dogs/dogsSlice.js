@@ -12,12 +12,16 @@ export const dogsApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Dogs", "Dog"],
+  tagTypes: ["Dogs", "Dog", "MyDogs"],
 
   endpoints: (builder) => ({
     getDogs: builder.query({
       query: () => `/dogs`,
-      providesTags: ["Dogs"],
+      providesTags: ["MyDogs"],
+      skip: ({ getState }) => {
+        const token = getState().auth.token;
+        return !token;
+      },
     }),
     getAllDogs: builder.query({
       query: ({ pages, itemsPerPage = 5 }) =>
@@ -44,11 +48,26 @@ export const dogsApi = createApi({
         method: "POST",
         body: newDog,
       }),
+      invalidatesTags: ["MyDogs"],
+    }),
+    addDogAllList: builder.mutation({
+      query: (newDog) => ({
+        url: "/alldogs/new-dog",
+        method: "POST",
+        body: newDog,
+      }),
       invalidatesTags: ["Dogs"],
     }),
     deleteDog: builder.mutation({
       query: (id) => ({
         url: `dogs/dog/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["MyDogs"],
+    }),
+    deleteDogAllList: builder.mutation({
+      query: (id) => ({
+        url: `alldogs/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Dogs"],
@@ -68,8 +87,10 @@ export const {
   useGetDogsQuery,
   useGetAllDogsQuery,
   useAddDogMutation,
+  useAddDogAllListMutation,
   useDeleteDogMutation,
   useUpdateDogMutation,
   useGetOneDogQuery,
   useGetOneDogFromAllQuery,
+  useDeleteDogAllListMutation,
 } = dogsApi;
