@@ -22,6 +22,8 @@ export const OneDog = ({ breed, name, image, page, id, dataDogs = [] }) => {
         <div className="h-[360px] relative">
           <Image
             priority
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
             src={image}
             alt={name}
             fill
