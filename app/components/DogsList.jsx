@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { OneDog } from "./OneDog";
 import { setCurrentToken } from "../store//auth/authSlice";
 import { useSession } from "next-auth/react";
-import { setAuthHeader } from "../api/httprequests";
 import { useGetAllDogsQuery } from "../store/dogs/dogsSlice";
 import { Loader } from "../components/Loader";
 import PaginatedItems from "./ReactPaginate";
@@ -42,7 +41,6 @@ const DogsList = ({ dogs, page }) => {
       dispatch(setCurrentToken(null));
       return;
     }
-    session.user.token && setAuthHeader(session.user.token);
     session.user.token && dispatch(setCurrentToken(session.user.token));
   }, [session]);
 
