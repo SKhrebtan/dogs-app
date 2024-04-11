@@ -24,10 +24,10 @@ export default async function RootLayout({
 
   return (
     <>
-      <Head>
-        <link rel="shortcut icon" href="../../public/favicon.ico" />
-      </Head>
       <html lang={locale} className="p-0 m-0">
+        <Head>
+          <link rel="shortcut icon" href="/favicon.ico" />
+        </Head>
         <body
           className={`${inter.className} dark:bg-slate-500 dark:text-white`}
         >
