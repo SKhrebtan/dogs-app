@@ -11,7 +11,7 @@ interface OneDogProps {
   name: string;
   image: string;
   page: string;
-  id: number;
+  id: string;
   dataDogs?: any[];
 }
 
@@ -62,7 +62,7 @@ export const OneDog: FC<OneDogProps> = ({
           dataDogs={dataDogs}
           page={page}
           id={id}
-          dog={{ breed, name, image }}
+          dog={{ id, breed, name, image }}
         >
           {page === "home" ? "Add" : "Delete"}
         </DogButton>

@@ -17,13 +17,13 @@ interface Dog {
 interface Props {
   dog: Dog;
   page: string;
-  id: number;
+  id: string;
   children: React.ReactNode;
   dataDogs: Dog[];
 }
 
 export const DogButton: FC<Props> = ({ dog, page, id, children, dataDogs }) => {
- const [isAdded, setIsAdded] = useState<Dog | undefined>(undefined);
+  const [isAdded, setIsAdded] = useState<Dog | undefined>(undefined);
   const { data: sessiondata } = useSession();
   const [deleteContact] = useDeleteDogMutation();
   const [addDog] = useAddDogMutation();
@@ -40,7 +40,7 @@ export const DogButton: FC<Props> = ({ dog, page, id, children, dataDogs }) => {
 
   const handleBtnAction = async (
     page: string,
-    id: number,
+    id: string,
     role?: string,
     token?: string
   ) => {
