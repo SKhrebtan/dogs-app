@@ -29,7 +29,7 @@ export default async function RootLayout({
           <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
         <body
-          className={`${inter.className} dark:bg-slate-500 dark:text-white`}
+          className={`${inter.className} dark:bg-slate-500 dark:text-white bg-transition duration-500`}
         >
           <ReduxProvider>
             <AuthProvider session={session}>
