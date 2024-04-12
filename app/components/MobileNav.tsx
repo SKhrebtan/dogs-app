@@ -43,7 +43,7 @@ export default function MobileNav() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3 }}
-            className={`fixed z-50 h-screen w-screen bg-yellow-100 ${
+            className={`fixed z-50 h-screen w-screen bg-yellow-100 bg-transition duration-500 dark:bg-slate-300 ${
               showMenu ? "overflow-hidden" : "overflow-auto"
             }`}
           >
@@ -83,7 +83,7 @@ export default function MobileNav() {
                       className={`${
                         pathname === `/${language}/dashboard`
                           ? "text-2xl text-blue-500 underline underline-offset-8"
-                          : ""
+                          : "text-2xl"
                       } `}
                     >
                       {t("dashboard")}

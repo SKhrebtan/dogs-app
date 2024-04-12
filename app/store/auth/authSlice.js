@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { updateAvatar } from "./operation";
 const initialState = {
-  user: { name: null, email: null },
   token: null,
   avatar: null,
 };

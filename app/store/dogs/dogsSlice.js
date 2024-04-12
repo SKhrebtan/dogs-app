@@ -18,10 +18,6 @@ export const dogsApi = createApi({
     getDogs: builder.query({
       query: () => `/dogs`,
       providesTags: ["MyDogs"],
-      skip: ({ getState }) => {
-        const token = getState().auth.token;
-        return !token;
-      },
     }),
     getAllDogs: builder.query({
       query: ({ pages, itemsPerPage = 5 }) =>

@@ -1,12 +1,22 @@
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
 import { useUpdateDogMutation } from "../store/dogs/dogsSlice";
-const DogDetailsPage = ({ dog }) => {
+
+interface DogDetailsPageProps {
+  dog: {
+    id: string;
+    name: string;
+    breed: string;
+    image: string;
+  };
+}
+
+const DogDetailsPage: FC<DogDetailsPageProps> = ({ dog }) => {
   const { id, name, breed, image } = dog;
   const [edit, setEdit] = useState(false);
   const [updateDog] = useUpdateDogMutation();
@@ -26,14 +36,20 @@ const DogDetailsPage = ({ dog }) => {
     breed: Yup.string().required("Breed is required"),
   });
 
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+  const handleSubmit = async (
+    values: { name: string; breed: string },
+    {
+      setSubmitting,
+      resetForm,
+    }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void }
+  ) => {
     const { name, breed } = values;
     try {
       const updatedDog = {
         name,
         breed,
       };
-      const { data } = await updateDog({ id, updatedDog });
+      await updateDog({ id, updatedDog });
       resetForm();
       setEdit(false);
       setSubmitting(false);
@@ -133,7 +149,7 @@ const DogDetailsPage = ({ dog }) => {
           <button
             type="button"
             onClick={() => setEdit(true)}
-            className="bg-blue-300 mobile:w-[180px]  self-center hover:bg-blue-700 hover:shadow-lg ease-linear duration-300 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-300 mobile:w-[180px]  self-center desktop:self-start hover:bg-blue-700 hover:shadow-lg ease-linear duration-300 text-white font-bold py-2 px-4 rounded"
           >
             Edit
           </button>

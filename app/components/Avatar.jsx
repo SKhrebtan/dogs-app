@@ -22,6 +22,10 @@ export const Avatar = () => {
       dispatch(updateAvatar(formData));
     })();
   }, [selectedAvatar]);
+  let user;
+  if (session?.user) {
+    user = session?.user;
+  }
 
   return (
     <div className="relative">
@@ -37,15 +41,15 @@ export const Avatar = () => {
         }}
         style={{ display: "none" }}
       />
-      {(avatarStore || session.user.avatar) && (
+      {(avatarStore || user.avatar) && (
         <Image
           onClick={() => inputRef?.current && inputRef.current.click()}
           onMouseEnter={() => setShowAvatarInfo(true)}
           onMouseLeave={() => setShowAvatarInfo(false)}
-          src={avatarStore || session.user.avatar}
-          alt={avatarStore || session.user.avatar || "avatar"}
-          width={narrowScreen ? 200 : 40}
-          height={narrowScreen ? 200 : 40}
+          src={avatarStore || user.avatar}
+          alt={avatarStore || user.avatar || "avatar"}
+          width={narrowScreen ? 200 : 60}
+          height={narrowScreen ? 200 : 60}
           className="relative cursor-pointer rounded-full"
         />
       )}

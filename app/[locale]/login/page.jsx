@@ -5,7 +5,7 @@ import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setCurrentToken } from "../../store/auth/authSlice";
+import { setCurrentToken, setCurrentAvatar } from "../../store/auth/authSlice";
 export default function Login() {
   const dispatch = useDispatch();
   const [error, setError] = useState("");
@@ -14,6 +14,7 @@ export default function Login() {
 
   useEffect(() => {
     if (sessionStatus === "authenticated") {
+      session.user.token && dispatch(setCurrentAvatar(session.user.avatar));
       session.user.token && dispatch(setCurrentToken(session.user.token));
       if (session.user.role === "admin") {
         router.replace("/dashboard");

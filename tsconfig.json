@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/SessionProvider.jsx", "app/api/auth/authOptions.js", "app/api/auth/[...nextauth]/route.js", "app/components/DogsList.jsx", "app/components/OneDog.jsx", "app/[locale]/not-found.js", "app/not-found.js", "app/components/Avatar.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/SessionProvider.jsx", "app/api/auth/authOptions.js", "app/api/auth/[...nextauth]/route.js", "app/components/DogsList.tsx", "app/components/OneDog.tsx", "app/[locale]/not-found.js", "app/not-found.js", "app/components/Avatar.jsx", "app/components/Loader.jsx", "app/store/store.js", "app/store/auth/authSlice.js"],
   "exclude": ["node_modules"]
 }

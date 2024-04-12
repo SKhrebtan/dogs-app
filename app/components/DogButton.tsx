@@ -5,21 +5,45 @@ import {
 } from "../store/dogs/dogsSlice";
 import Svg from "../../assets/images/heart-svgrepo-com.svg";
 import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 
-export const DogButton = ({ dog, page, id, children, dataDogs }) => {
-  const [isAdded, setIsAdded] = useState(false);
+interface Dog {
+  id: string;
+  name: string;
+  breed: string;
+  image: string;
+}
+
+interface Props {
+  dog: Dog;
+  page: string;
+  id: number;
+  children: React.ReactNode;
+  dataDogs: Dog[];
+}
+
+export const DogButton: FC<Props> = ({ dog, page, id, children, dataDogs }) => {
+ const [isAdded, setIsAdded] = useState<Dog | undefined>(undefined);
   const { data: sessiondata } = useSession();
   const [deleteContact] = useDeleteDogMutation();
   const [addDog] = useAddDogMutation();
   const [deleteDogAllList] = useDeleteDogAllListMutation();
 
   useEffect(() => {
-    setIsAdded(dataDogs?.find((el) => el.name === dog.name));
+    const addedDog = dataDogs?.find((el) => el.name === dog.name);
+    setIsAdded(addedDog);
   }, [sessiondata, dataDogs]);
-  const user = sessiondata?.user;
+  let user: any;
+  if (sessiondata) {
+    user = sessiondata?.user;
+  }
 
-  const handleBtnAction = async (page, id, role, token) => {
+  const handleBtnAction = async (
+    page: string,
+    id: number,
+    role?: string,
+    token?: string
+  ) => {
     if (page === "mydogs") {
       await deleteContact(id);
     } else {
@@ -28,6 +52,7 @@ export const DogButton = ({ dog, page, id, children, dataDogs }) => {
         return;
       }
       if (isAdded) {
+        console.log(isAdded);
         await deleteContact(isAdded.id);
       } else {
         await addDog(dog);

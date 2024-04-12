@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { FC } from "react";
 import ReactPaginate from "react-paginate";
 import "./styles.css";
-export default function PaginatedItems({ dogs, setPages, pages, totalPages }) {
-  //   const [pageCount, setPageCount] = useState(0);
-  //   const [itemOffset, setItemOffset] = useState(0);
-  //   const itemsPerPage = 4;
-  //   useEffect(() => {
-  //     if (!dogs) return;
-  //     const endOffset = itemOffset + itemsPerPage;
-  //     setCurrentItems(dogs.slice(itemOffset, endOffset));
-  //       setPageCount(Math.ceil(dogs.length / itemsPerPage));
-  //     setPageCount(Math.ceil(dogs.length));
-  //   }, [itemOffset, itemsPerPage, dogs]);
 
-  //   const handlePageClick = (event) => {
-  //     const newOffset = (event.selected * itemsPerPage) % dogs.length;
-  //     setItemOffset(newOffset);
-  //   };
+interface PaginatedItemsProps {
+  dogs: any[];
+  setPages: (pages: number) => void;
+  pages: number;
+  totalPages: number;
+}
 
-  const handlePageClick2 = ({ selected }) => {
+const PaginatedItems: FC<PaginatedItemsProps> = ({
+  dogs,
+  setPages,
+  pages,
+  totalPages,
+}) => {
+  const handlePageClick2 = ({ selected }: { selected: number }) => {
     setPages(selected + 1);
   };
 
@@ -49,4 +46,6 @@ export default function PaginatedItems({ dogs, setPages, pages, totalPages }) {
       />
     </div>
   );
-}
+};
+
+export default PaginatedItems;

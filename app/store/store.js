@@ -19,6 +19,7 @@ const authPersistConfig = {
   storage,
   whitelist: ["token", "avatar"],
 };
+
 export const store = configureStore(
   {
     reducer: {
@@ -40,3 +41,4 @@ export const store = configureStore(
 );
 
 export const persistor = persistStore(store);
+// export type RootState = ReturnType<typeof store.getState>;

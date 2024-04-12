@@ -23,7 +23,7 @@ const DesktopNav = () => {
   const user: any = session?.user;
 
   return (
-    <div className="bg-yellow-200 py-[10px] px-[30px]">
+    <div className="bg-yellow-200 py-[10px] px-[30px] bg-transition duration-500 dark:bg-yellow-500">
       <ul className="flex justify-between items-center">
         <div className="flex items-center">
           <Link href="/">
