@@ -62,7 +62,7 @@ const DogsList: FC<DogsListProps> = ({ dogs, page }) => {
   return (
     <div className="p-[20px]">
       {isLoading && (
-        <div className="w-screen flex flex-row justify-center">
+        <div className="w-full flex flex-row justify-center">
           <Loader />
         </div>
       )}
