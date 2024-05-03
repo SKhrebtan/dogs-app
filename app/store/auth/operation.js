@@ -14,6 +14,7 @@ const token = {
 export const updateAvatar = createAsyncThunk(
   "auth/avatar",
   async (file, thunkAPI) => {
+    
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
     if (persistedToken === null) {

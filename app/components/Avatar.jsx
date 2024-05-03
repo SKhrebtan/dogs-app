@@ -19,6 +19,7 @@ export const Avatar = () => {
     (async () => {
       const formData = new FormData();
       formData.append("file", selectedAvatar);
+      console.log(formData)
       dispatch(updateAvatar(formData));
     })();
   }, [selectedAvatar]);

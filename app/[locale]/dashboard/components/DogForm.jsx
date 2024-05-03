@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useAddDogAllListMutation } from "@/app/store/dogs/dogsSlice";
 const DogForm = () => {
+  const [photo, setPhoto] = useState(null);
   const [addDogAllList, { isLoading }] = useAddDogAllListMutation();
   const initialValues = {
     name: "",
@@ -39,7 +40,7 @@ const DogForm = () => {
       onSubmit={handleSubmit}
     >
       {({ isSubmitting, setFieldValue, values }) => (
-        <Form className="max-w-md mx-auto">
+        <Form className="max-w-md mx-auto p-4">
           <div className="mb-4">
             <label
               htmlFor="name"
@@ -95,9 +96,14 @@ const DogForm = () => {
                   id="file"
                   name="file"
                   type="file"
-                  onChange={(event) =>
-                    setFieldValue("file", event.currentTarget.files[0])
-                  }
+                  onChange={(event) => {
+                    setFieldValue("file", event.currentTarget.files[0]);
+                    const fileReader = new FileReader();
+                    fileReader.readAsDataURL(event.currentTarget.files[0]);
+                    fileReader.onload = () => {
+                      setPhoto(fileReader.result);
+                    };
+                  }}
                   className="sr-only"
                 />
               </label>
@@ -120,6 +126,15 @@ const DogForm = () => {
           >
             {isLoading ? "Loading..." : "Submit"}
           </button>
+          {photo && (
+            <img
+              src={photo}
+              alt="photo"
+              width={480}
+              height={360}
+              className="mt-10"
+            />
+          )}
         </Form>
       )}
     </Formik>

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
@@ -23,6 +23,7 @@ export default function MobileNav() {
   const pathname = usePathname();
 
   const { data: session } = useSession();
+  useMemo
   useEffect(() => {
     if (showMenu) {
       document.body.style.overflow = "hidden";
@@ -51,7 +52,7 @@ export default function MobileNav() {
               onClick={() => setShowMenu(false)}
               className="absolute right-[25px] top-[25px] hover:fill-blue-300 hover:rotate-180 ease-linear duration-300 cursor-pointer"
             />
-            <ul className="flex flex-col gap-6 items-start pl-[60px] pt-[40px]">
+            <ul className="flex flex-col gap-6 items-start pl-[40px] pt-[30px]">
               <div className="flex flex-col gap-6 mb-[60px]">
                 <Link href="/" onClick={handleMenu}>
                   <li
